@@ -1,5 +1,5 @@
 ## ─────────────────────────────────────────────
-##  Generic Makefile for C  |  Arch Linux
+##  Makefile for C  
 ##  Usage: make <filename_without_extension>
 ##  Example: make main   →  compiles main.c → ./main
 ## ─────────────────────────────────────────────

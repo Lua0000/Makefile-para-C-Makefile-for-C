@@ -1,32 +1,32 @@
 ## ─────────────────────────────────────────────
-##  Makefile genérico para C++  |  Arch Linux
+##  Makefile genérico para C  
 ##  Uso: make <nome_sem_extensao>
-##  Ex:  make main   →  compila main.cpp → ./main
+##  Ex:  make main   →  compila main.c → ./main
 ## ─────────────────────────────────────────────
 
-CXX      := g++
-CXXFLAGS := -std=c++17 -Wall -Wextra -Wpedantic -O2
+CC     := gcc
+CFLAGS := -std=c11 -Wall -Wextra -Wpedantic -O2
 
 # Regra padrão: exibe ajuda se chamado sem alvo
 .DEFAULT_GOAL := help
 
-## Compila e executa qualquer arquivo .cpp pelo nome
-## Ex: make hello  →  g++ hello.cpp -o hello && ./hello
-%: %.cpp
-	$(CXX) $(CXXFLAGS) $< -o $@
+## Compila e executa qualquer arquivo .c pelo nome
+## Ex: make hello  →  gcc hello.c -o hello && ./hello
+%: %.c
+	$(CC) $(CFLAGS) $< -o $@
 	@echo "✔  Compilado: $@ — executando...\n"
 	@./$@
 
 ## Compila com símbolos de debug (gdb/valgrind)
 ## Ex: make hello.debug
-%.debug: %.cpp
-	$(CXX) $(CXXFLAGS) -g3 -DDEBUG $< -o $@
+%.debug: %.c
+	$(CC) $(CFLAGS) -g3 -DDEBUG $< -o $@
 	@echo "✔  Build debug: $@ — executando...\n"
 	@./$@
 
-## Remove binários gerados (sem extensão, sem Makefile)
+## Remove binários gerados
 clean:
-	@find . -maxdepth 1 -type f ! -name "*.cpp" ! -name "*.h" \
+	@find . -maxdepth 1 -type f ! -name "*.c" ! -name "*.h" \
 	         ! -name "Makefile" ! -name "*.md" -delete
 	@echo "✔  Diretório limpo."
 
@@ -34,12 +34,12 @@ clean:
 help:
 	@echo ""
 	@echo "  Uso:"
-	@echo "    make <arquivo>        Compila <arquivo>.cpp → ./<arquivo>"
+	@echo "    make <arquivo>        Compila e executa <arquivo>.c"
 	@echo "    make <arquivo>.debug  Compila com -g3 para debug"
 	@echo "    make clean            Remove todos os binários gerados"
 	@echo ""
 	@echo "  Exemplo:"
-	@echo "    make main             →  g++ main.cpp -o main"
+	@echo "    make main             →  gcc main.c -o main && ./main"
 	@echo ""
 
 .PHONY: clean help

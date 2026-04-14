@@ -1,0 +1,45 @@
+## ─────────────────────────────────────────────
+##  Generic Makefile for C  |  Arch Linux
+##  Usage: make <filename_without_extension>
+##  Example: make main   →  compiles main.c → ./main
+## ─────────────────────────────────────────────
+
+CC     := gcc
+CFLAGS := -std=c11 -Wall -Wextra -Wpedantic -O2
+
+# Default rule: show help if no target is provided
+.DEFAULT_GOAL := help
+
+## Compile and run any .c file by name
+## Example: make hello  →  gcc hello.c -o hello && ./hello
+%: %.c
+	$(CC) $(CFLAGS) $< -o $@
+	@echo "✔  Compiled: $@ — running...\n"
+	@./$@
+
+## Compile with debug symbols (gdb/valgrind)
+## Example: make hello.debug
+%.debug: %.c
+	$(CC) $(CFLAGS) -g3 -DDEBUG $< -o $@
+	@echo "✔  Debug build: $@ — running...\n"
+	@./$@
+
+## Remove generated binaries
+clean:
+	@find . -maxdepth 1 -type f ! -name "*.c" ! -name "*.h" \
+	         ! -name "Makefile" ! -name "*.md" -delete
+	@echo "✔  Directory cleaned."
+
+## Show this help message
+help:
+	@echo ""
+	@echo "  Usage:"
+	@echo "    make <file>        Compile and run <file>.c"
+	@echo "    make <file>.debug  Compile with -g3 for debugging"
+	@echo "    make clean         Remove all generated binaries"
+	@echo ""
+	@echo "  Example:"
+	@echo "    make main          →  gcc main.c -o main && ./main"
+	@echo ""
+
+.PHONY: clean help

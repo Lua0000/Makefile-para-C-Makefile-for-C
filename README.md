@@ -1,30 +1,34 @@
 # C Makefile
 
-Simple and generic Makefile to compile and run C files quickly.  
+Simple and generic Makefile to compile and run C files quickly.
 Makefile simples e genérico para compilar e executar arquivos C rapidamente.
 
 ---
 
 ## Features / Funcionalidades
 
-- Compile any `.c` file automatically  
-- Compila qualquer arquivo `.c` automaticamente  
+* Compile any `.c` file automatically
 
-- Runs the binary after compilation  
-- Executa o binário após compilar  
+* Compila qualquer arquivo `.c` automaticamente
 
-- Debug support (`gdb`, `valgrind`)  
-- Suporte a debug (`gdb`, `valgrind`)  
+* Runs the binary after compilation
 
-- Automatic binary cleanup  
-- Limpeza automática de binários  
+* Executa o binário após compilar
+
+* Debug support (`gdb`, `valgrind`)
+
+* Suporte a debug (`gdb`, `valgrind`)
+
+* Automatic binary cleanup
+
+* Limpeza automática de binários
 
 ---
 
 ## Requirements / Requisitos
 
-- gcc
-- make
+* gcc
+* make
 
 ---
 
@@ -34,3 +38,62 @@ Makefile simples e genérico para compilar e executar arquivos C rapidamente.
 
 ```bash
 make main
+```
+
+Compiles `main.c` and runs `./main`
+Compila `main.c` e executa `./main`
+
+---
+
+### Debug
+
+```bash
+make main.debug
+```
+
+Compiles with debug symbols
+Compila com símbolos de debug
+
+---
+
+### Clean
+
+```bash
+make clean
+```
+
+Removes generated files
+Remove arquivos gerados
+
+---
+
+## Structure / Estrutura
+
+```
+.
+├── Makefile
+├── main.c
+├── hello.c
+└── README.md
+```
+
+---
+
+## Example / Exemplo
+
+```bash
+make hello
+```
+
+Output:
+
+```
+Compiled: hello — running...
+Hello, world!
+```
+
+---
+
+## License / Licença
+
+MIT
